@@ -50,27 +50,27 @@ class ProcessorPanel extends JPanel{
         size=new JMenu("Size");
 
         // Creating JMenu items
-        configureMenu("Arial","font","",1,1);
+        configureMenu("Arial","font","Arial",9,10);
 
-        configureMenu("Courier","font","",1,1);
+        configureMenu("Georgia","font","Georgia",9,10);
 
-        configureMenu("Verdana","font","",1,1);
-
-        //--------------------------------
-
-        configureMenu("Bold","style","",1,1);
-
-        configureMenu("Italic","style","",1,1);
+        configureMenu("Verdana","font","Verdana",9,10);
 
         //--------------------------------
 
-        configureMenu("12","size","",1,1);
+        configureMenu("Bold","style","",Font.BOLD,1);
 
-        configureMenu("16","size","",1,1);
+        configureMenu("Italic","style","",Font.ITALIC,1);
 
-        configureMenu("20","size","",1,1);
+        //--------------------------------
 
-        configureMenu("24","size","",1,1);
+        configureMenu("12","size","",9,12);
+
+        configureMenu("16","size","",9,16);
+
+        configureMenu("20","size","",9,20);
+
+        configureMenu("24","size","",9,24);
 
 
         // Adding options to bar
@@ -106,15 +106,55 @@ class ProcessorPanel extends JPanel{
             this.size.add(itemMenu);
         }
 
-        itemMenu.addActionListener(new MenuListener());
+        itemMenu.addActionListener(new MenuListener(menuItemText, font, style, size));
     }
 
     private class MenuListener implements ActionListener{
 
+        private String textType, menu;
+
+        private int textStyle, textSize;
+
+        MenuListener(String menuSelected, String textTypeSelected, int textStyleSelected, int textSizeSelected){
+
+            menu = menuSelected;
+
+            textType = textTypeSelected;
+
+            textStyle = textStyleSelected;
+
+            textSize = textSizeSelected;
+
+        }
+
+
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            textArea.setFont(new Font("Courier", Font.PLAIN, 20));
+            fonts = textArea.getFont();
+
+            if(menu.equals("Arial") || menu.equals("Georgia") || menu.equals("Verdana")){
+
+                textStyle = fonts.getStyle();
+
+                textSize = fonts.getSize();
+
+
+            }else if(menu.equals("Bold") || menu.equals("Italic")){
+
+                textType = fonts.getFontName();
+
+                textSize = fonts.getSize();
+
+            }else if(menu.equals("12") || menu.equals("16") || menu.equals("20") || menu.equals("24")){
+
+                textType = fonts.getFontName();
+
+                textStyle = fonts.getStyle();
+
+            }
+
+            textArea.setFont(new Font(textType, textStyle, textSize));
 
         }
     }
