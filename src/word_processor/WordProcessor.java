@@ -27,6 +27,13 @@ class ProcessorMenu extends JFrame {
 }
 
 class ProcessorPanel extends JPanel{
+
+    private JTextPane textArea;
+
+    private JMenu font, style, size;
+
+    private Font fonts;
+
     public ProcessorPanel(){
         setLayout(new BorderLayout());
 
@@ -36,51 +43,35 @@ class ProcessorPanel extends JPanel{
 
         // Creating JMenuBar options
 
-        JMenu font=new JMenu("Font");
+        font=new JMenu("Font");
 
-        JMenu style=new JMenu("Style");
+        style=new JMenu("Style");
 
-        JMenu size=new JMenu("Size");
+        size=new JMenu("Size");
 
         // Creating JMenu items
+        configureMenu("Arial","font","",1,1);
 
-        JMenuItem arial=new JMenuItem("Arial");
+        configureMenu("Courier","font","",1,1);
 
-        JMenuItem courier=new JMenuItem("Courier");
+        configureMenu("Verdana","font","",1,1);
 
-        JMenuItem verdana=new JMenuItem("Verdana");
+        //--------------------------------
 
-        JMenuItem bold=new JMenuItem("Bold");
+        configureMenu("Bold","style","",1,1);
 
-        JMenuItem italic=new JMenuItem("Italic");
+        configureMenu("Italic","style","",1,1);
 
-        JMenuItem size_12=new JMenuItem("12");
+        //--------------------------------
 
-        JMenuItem size_16=new JMenuItem("16");
+        configureMenu("12","size","",1,1);
 
-        JMenuItem size_20=new JMenuItem("20");
+        configureMenu("16","size","",1,1);
 
-        JMenuItem size_24=new JMenuItem("24");
+        configureMenu("20","size","",1,1);
 
-        // Adding items to menu
+        configureMenu("24","size","",1,1);
 
-        font.add(arial);
-
-        font.add(courier);
-
-        font.add(verdana);
-
-        style.add(bold);
-
-        style.add(italic);
-
-        size.add(size_12);
-
-        size.add(size_16);
-
-        size.add(size_20);
-
-        size.add(size_24);
 
         // Adding options to bar
 
@@ -95,6 +86,38 @@ class ProcessorPanel extends JPanel{
         panelMenu.add(bar);
 
         add(panelMenu, BorderLayout.NORTH);
-        
+
+        textArea=new JTextPane();
+
+        add(textArea, BorderLayout.CENTER);
+
+
     }
+
+    public void configureMenu(String menuItemText, String menuPlacement, String font, int style, int size){
+
+        JMenuItem itemMenu=new JMenuItem(menuItemText);
+
+        if(menuPlacement.equals("font")){
+            this.font.add(itemMenu);
+        }else if(menuPlacement.equals("style")){
+            this.style.add(itemMenu);
+        }else if(menuPlacement.equals("size")){
+            this.size.add(itemMenu);
+        }
+
+        itemMenu.addActionListener(new MenuListener());
+    }
+
+    private class MenuListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            textArea.setFont(new Font("Courier", Font.PLAIN, 20));
+
+        }
+    }
+
+
 }
