@@ -1,5 +1,6 @@
 package word_processor;
 import javax.swing.*;
+import javax.swing.text.StyledEditorKit;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -100,64 +101,37 @@ class ProcessorPanel extends JPanel{
 
         if(menuPlacement.equals("font")){
             this.font.add(itemMenu);
-        }else if(menuPlacement.equals("style")){
-            this.style.add(itemMenu);
-        }else if(menuPlacement.equals("size")){
-            this.size.add(itemMenu);
-        }
 
-        itemMenu.addActionListener(new MenuListener(menuItemText, font, style, size));
-    }
-
-    private class MenuListener implements ActionListener{
-
-        private String textType, menu;
-
-        private int textStyle, textSize;
-
-        MenuListener(String menuSelected, String textTypeSelected, int textStyleSelected, int textSizeSelected){
-
-            menu = menuSelected;
-
-            textType = textTypeSelected;
-
-            textStyle = textStyleSelected;
-
-            textSize = textSizeSelected;
-
-        }
-
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            fonts = textArea.getFont();
-
-            if(menu.equals("Arial") || menu.equals("Georgia") || menu.equals("Verdana")){
-
-                textStyle = fonts.getStyle();
-
-                textSize = fonts.getSize();
-
-
-            }else if(menu.equals("Bold") || menu.equals("Italic")){
-
-                textType = fonts.getFontName();
-
-                textSize = fonts.getSize();
-
-            }else if(menu.equals("12") || menu.equals("16") || menu.equals("20") || menu.equals("24")){
-
-                textType = fonts.getFontName();
-
-                textStyle = fonts.getStyle();
+            if(font.equals("Arial")){
+                itemMenu.addActionListener(new StyledEditorKit.FontFamilyAction("changeFont","Arial"));
+            }else if(font.equals("Georgia")){
+                itemMenu.addActionListener(new StyledEditorKit.FontFamilyAction("changeFont","Georgia"));
+            }else if(font.equals("Verdana")){
+                itemMenu.addActionListener(new StyledEditorKit.FontFamilyAction("changeFont","Verdana"));
 
             }
 
-            textArea.setFont(new Font(textType, textStyle, textSize));
+        }else if(menuPlacement.equals("style")){
 
+            this.style.add(itemMenu);
+
+            if(style==Font.BOLD){
+                itemMenu.addActionListener(new StyledEditorKit.BoldAction());
+            }else if(style==Font.ITALIC){
+                itemMenu.addActionListener(new StyledEditorKit.ItalicAction());
+
+            }
+
+        }else if(menuPlacement.equals("size")){
+
+            this.size.add(itemMenu);
+
+            itemMenu.addActionListener(new StyledEditorKit.FontSizeAction("modifySize",size));
         }
+
     }
+
+
 
 
 }
