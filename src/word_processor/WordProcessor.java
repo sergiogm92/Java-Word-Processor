@@ -51,27 +51,27 @@ class ProcessorPanel extends JPanel{
         size=new JMenu("Size");
 
         // Creating JMenu items
-        configureMenu("Arial","font","Arial",9,10);
+        configureMenu("Arial","font","Arial",9,10, "");
 
-        configureMenu("Georgia","font","Georgia",9,10);
+        configureMenu("Georgia","font","Georgia",9,10, "");
 
-        configureMenu("Verdana","font","Verdana",9,10);
-
-        //--------------------------------
-
-        configureMenu("Bold","style","",Font.BOLD,1);
-
-        configureMenu("Italic","style","",Font.ITALIC,1);
+        configureMenu("Verdana","font","Verdana",9,10, "");
 
         //--------------------------------
 
-        configureMenu("12","size","",9,12);
+        configureMenu("Bold","style","",Font.BOLD,1, "src/img/bold.png");
 
-        configureMenu("16","size","",9,16);
+        configureMenu("Italic","style","",Font.ITALIC,1, "src/img/italic.png");
 
-        configureMenu("20","size","",9,20);
+        //--------------------------------
 
-        configureMenu("24","size","",9,24);
+        configureMenu("12","size","",9,12,"");
+
+        configureMenu("16","size","",9,16,"");
+
+        configureMenu("20","size","",9,20,"");
+
+        configureMenu("24","size","",9,24,"");
 
 
         // Adding options to bar
@@ -95,9 +95,9 @@ class ProcessorPanel extends JPanel{
 
     }
 
-    public void configureMenu(String menuItemText, String menuPlacement, String font, int style, int size){
+    public void configureMenu(String menuItemText, String menuPlacement, String font, int style, int size, String icon){
 
-        JMenuItem itemMenu=new JMenuItem(menuItemText);
+        JMenuItem itemMenu=new JMenuItem(menuItemText, new ImageIcon(icon));
 
         if(menuPlacement.equals("font")){
             this.font.add(itemMenu);
