@@ -102,6 +102,10 @@ class ProcessorPanel extends JPanel{
 
         italic.addActionListener(new StyledEditorKit.ItalicAction());
 
+        bold.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
+
+        italic.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_DOWN_MASK));
+
         popupMenu.add(bold);
 
         popupMenu.add(italic);
@@ -133,9 +137,10 @@ class ProcessorPanel extends JPanel{
 
             if(style==Font.BOLD){
                 itemMenu.addActionListener(new StyledEditorKit.BoldAction());
+                itemMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
             }else if(style==Font.ITALIC){
                 itemMenu.addActionListener(new StyledEditorKit.ItalicAction());
-
+                itemMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_DOWN_MASK));
             }
 
         }else if(menuPlacement.equals("size")){
