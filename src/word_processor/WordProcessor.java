@@ -92,6 +92,22 @@ class ProcessorPanel extends JPanel{
 
         add(textArea, BorderLayout.CENTER);
 
+        JPopupMenu popupMenu=new JPopupMenu();
+
+        JMenuItem bold=new JMenuItem("Bold", new ImageIcon("src/img/bold.png"));
+
+        JMenuItem italic=new JMenuItem("Italic", new ImageIcon("src/img/italic.png"));
+
+        bold.addActionListener(new StyledEditorKit.BoldAction());
+
+        italic.addActionListener(new StyledEditorKit.ItalicAction());
+
+        popupMenu.add(bold);
+
+        popupMenu.add(italic);
+
+        textArea.setComponentPopupMenu(popupMenu);
+
 
     }
 
