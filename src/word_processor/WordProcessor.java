@@ -112,6 +112,30 @@ class ProcessorPanel extends JPanel{
 
         textArea.setComponentPopupMenu(popupMenu);
 
+        JToolBar toolBar=new JToolBar();
+
+        toolBar.setOrientation(SwingConstants.VERTICAL);
+
+        JButton boldButton=new JButton(new ImageIcon("src/img/bold.png"));
+
+        JButton italicButton=new JButton(new ImageIcon("src/img/italic.png"));
+
+        JButton underlineButton=new JButton(new ImageIcon("src/img/underline.png"));
+
+        boldButton.addActionListener(new StyledEditorKit.BoldAction());
+
+        italicButton.addActionListener(new StyledEditorKit.ItalicAction());
+
+        underlineButton.addActionListener(new StyledEditorKit.UnderlineAction());
+
+        toolBar.add(boldButton);
+
+        toolBar.add(italicButton);
+
+        toolBar.add(underlineButton);
+
+        add(toolBar, BorderLayout.WEST);
+
 
     }
 
