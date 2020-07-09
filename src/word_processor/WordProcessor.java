@@ -122,17 +122,59 @@ class ProcessorPanel extends JPanel{
 
         JButton underlineButton=new JButton(new ImageIcon("src/img/underline.png"));
 
+        JButton blueButton=new JButton(new ImageIcon("src/img/blue.png"));
+
+        JButton yellowButton=new JButton(new ImageIcon("src/img/yellow.png"));
+
+        JButton redButton=new JButton(new ImageIcon("src/img/red.png"));
+
+        JButton leftButton=new JButton(new ImageIcon("src/img/left.png"));
+
+        JButton rightButton=new JButton(new ImageIcon("src/img/right.png"));
+
+        JButton centerButton=new JButton(new ImageIcon("src/img/center.png"));
+
+        JButton justifyButton=new JButton(new ImageIcon("src/img/justify.png"));
+
         boldButton.addActionListener(new StyledEditorKit.BoldAction());
 
         italicButton.addActionListener(new StyledEditorKit.ItalicAction());
 
         underlineButton.addActionListener(new StyledEditorKit.UnderlineAction());
 
+        blueButton.addActionListener(new StyledEditorKit.ForegroundAction("blue", Color.BLUE));
+
+        yellowButton.addActionListener(new StyledEditorKit.ForegroundAction("yellow", Color.YELLOW));
+
+        redButton.addActionListener(new StyledEditorKit.ForegroundAction("red", Color.RED));
+
+        leftButton.addActionListener(new StyledEditorKit.AlignmentAction("left", 0));
+
+        centerButton.addActionListener(new StyledEditorKit.AlignmentAction("center", 1));
+
+        rightButton.addActionListener(new StyledEditorKit.AlignmentAction("right", 2));
+
+        justifyButton.addActionListener(new StyledEditorKit.AlignmentAction("justify", 3));
+
         toolBar.add(boldButton);
 
         toolBar.add(italicButton);
 
         toolBar.add(underlineButton);
+
+        toolBar.add(blueButton);
+
+        toolBar.add(yellowButton);
+
+        toolBar.add(redButton);
+
+        toolBar.add(leftButton);
+
+        toolBar.add(centerButton);
+
+        toolBar.add(rightButton);
+
+        toolBar.add(justifyButton);
 
         add(toolBar, BorderLayout.WEST);
 
