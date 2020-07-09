@@ -35,6 +35,10 @@ class ProcessorPanel extends JPanel{
 
     private Font fonts;
 
+    JButton boldButton, italicButton, underlineButton, blueButton, yellowButton, redButton, leftButton, centerButton, rightButton, justifyButton;
+
+    JToolBar toolBar;
+
     public ProcessorPanel(){
         setLayout(new BorderLayout());
 
@@ -88,9 +92,13 @@ class ProcessorPanel extends JPanel{
 
         add(panelMenu, BorderLayout.NORTH);
 
+        // Creating and adding the textArea
+
         textArea=new JTextPane();
 
         add(textArea, BorderLayout.CENTER);
+
+        // Creating a simple popUp for bold and italic
 
         JPopupMenu popupMenu=new JPopupMenu();
 
@@ -112,72 +120,37 @@ class ProcessorPanel extends JPanel{
 
         textArea.setComponentPopupMenu(popupMenu);
 
-        JToolBar toolBar=new JToolBar();
+        // Creating a toolBar
+
+        toolBar=new JToolBar();
+
+        configureToolBar("src/img/bold.png").addActionListener(new StyledEditorKit.BoldAction());
+
+        configureToolBar("src/img/italic.png").addActionListener(new StyledEditorKit.ItalicAction());
+
+        configureToolBar("src/img/underline.png").addActionListener(new StyledEditorKit.UnderlineAction());
+
+        toolBar.addSeparator();
+
+        configureToolBar("src/img/blue.png").addActionListener(new StyledEditorKit.ForegroundAction("blue",Color.BLUE));
+
+        configureToolBar("src/img/yellow.png").addActionListener(new StyledEditorKit.ForegroundAction("yellow",Color.YELLOW));
+
+        configureToolBar("src/img/red.png").addActionListener(new StyledEditorKit.ForegroundAction("red",Color.RED));
+
+        toolBar.addSeparator();
+
+        configureToolBar("src/img/left.png").addActionListener(new StyledEditorKit.AlignmentAction("left",0));
+
+        configureToolBar("src/img/center.png").addActionListener(new StyledEditorKit.AlignmentAction("center",1));
+
+        configureToolBar("src/img/right.png").addActionListener(new StyledEditorKit.AlignmentAction("right",2));
+
+        configureToolBar("src/img/justify.png").addActionListener(new StyledEditorKit.AlignmentAction("justify",3));
 
         toolBar.setOrientation(SwingConstants.VERTICAL);
 
-        JButton boldButton=new JButton(new ImageIcon("src/img/bold.png"));
-
-        JButton italicButton=new JButton(new ImageIcon("src/img/italic.png"));
-
-        JButton underlineButton=new JButton(new ImageIcon("src/img/underline.png"));
-
-        JButton blueButton=new JButton(new ImageIcon("src/img/blue.png"));
-
-        JButton yellowButton=new JButton(new ImageIcon("src/img/yellow.png"));
-
-        JButton redButton=new JButton(new ImageIcon("src/img/red.png"));
-
-        JButton leftButton=new JButton(new ImageIcon("src/img/left.png"));
-
-        JButton rightButton=new JButton(new ImageIcon("src/img/right.png"));
-
-        JButton centerButton=new JButton(new ImageIcon("src/img/center.png"));
-
-        JButton justifyButton=new JButton(new ImageIcon("src/img/justify.png"));
-
-        boldButton.addActionListener(new StyledEditorKit.BoldAction());
-
-        italicButton.addActionListener(new StyledEditorKit.ItalicAction());
-
-        underlineButton.addActionListener(new StyledEditorKit.UnderlineAction());
-
-        blueButton.addActionListener(new StyledEditorKit.ForegroundAction("blue", Color.BLUE));
-
-        yellowButton.addActionListener(new StyledEditorKit.ForegroundAction("yellow", Color.YELLOW));
-
-        redButton.addActionListener(new StyledEditorKit.ForegroundAction("red", Color.RED));
-
-        leftButton.addActionListener(new StyledEditorKit.AlignmentAction("left", 0));
-
-        centerButton.addActionListener(new StyledEditorKit.AlignmentAction("center", 1));
-
-        rightButton.addActionListener(new StyledEditorKit.AlignmentAction("right", 2));
-
-        justifyButton.addActionListener(new StyledEditorKit.AlignmentAction("justify", 3));
-
-        toolBar.add(boldButton);
-
-        toolBar.add(italicButton);
-
-        toolBar.add(underlineButton);
-
-        toolBar.add(blueButton);
-
-        toolBar.add(yellowButton);
-
-        toolBar.add(redButton);
-
-        toolBar.add(leftButton);
-
-        toolBar.add(centerButton);
-
-        toolBar.add(rightButton);
-
-        toolBar.add(justifyButton);
-
         add(toolBar, BorderLayout.WEST);
-
 
     }
 
@@ -216,6 +189,15 @@ class ProcessorPanel extends JPanel{
             itemMenu.addActionListener(new StyledEditorKit.FontSizeAction("modifySize",size));
         }
 
+    }
+
+    public JButton configureToolBar(String path){
+
+        JButton button=new JButton(new ImageIcon(path));
+
+        toolBar.add(button);
+
+        return button;
     }
 
 
